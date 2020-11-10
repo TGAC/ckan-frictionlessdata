@@ -23,5 +23,5 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('list_all/', views.list_all),
-    path('search', views.search_ckan),
+    path('search', views.ckan_search),
 ]
