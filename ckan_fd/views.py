@@ -25,3 +25,14 @@ def ckan_convert(request):
     search_string = request.GET['q']
     response_json = convert_ckan(search_string)
     return HttpResponse(response_json, content_type='application/json')
+
+
+def ckan_package_json(request):
+    search_string = request.GET['q']
+    response_json = convert_ckan(search_string)
+    # return HttpResponse(response_json, content_type='application/json')
+    filename = "datapackage.json"
+    content = response_json
+    response = HttpResponse(content, content_type='application/json')
+    response['Content-Disposition'] = 'attachment; filename={0}'.format(filename)
+    return response
