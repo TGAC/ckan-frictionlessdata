@@ -24,4 +24,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('list_all/', views.list_all),
     path('search', views.ckan_search),
+    path('convert', views.ckan_convert),
 ]
