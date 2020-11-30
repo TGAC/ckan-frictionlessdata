@@ -10,6 +10,8 @@ from .requests import convert_ckan
 
 
 def index(request):
+    # list_json = get_all_ckan_list()
+    # return render(request, 'index.html', {'data': json.dumps(list_json.get('result'))})
     return render(request, 'index.html', {})
 
 def list_all(request):
