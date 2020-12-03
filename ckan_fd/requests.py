@@ -21,5 +21,11 @@ def search_ckan(string):
 def convert_ckan(string):
     res = requests.get(detail_url+string)
     res_json = res.json()
-    output_frictionless_dict = ckan_to_frictionless.resource(res_json.get('result'))
+    output_frictionless_dict = ckan_to_frictionless.dataset(res_json.get('result'))
+    return json.dumps(output_frictionless_dict)
+
+def convert_ckan_resources(string):
+    res = requests.get(detail_url+string)
+    res_json = res.json()
+    output_frictionless_dict = ckan_to_frictionless.dataset(res_json.get('result'))
     return json.dumps(output_frictionless_dict)

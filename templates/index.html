@@ -13,11 +13,14 @@
 <h2>REST interface</h2>
 <h3>GET</h3>
 <ul>
-    <li>list_all/ - view all json in the CKAN</li>
-    <li>search?q={string} - search within CKAN</li>
-    <li>convert?q={ckan-dataset-id} - convert CKAN dataset json to datapage json</li>
-    <li>package_json?q={ckan-dataset-id} - download CKAN dataset json to datapage.json file</li>
+    <li>convert?q={ckan-dataset-id} - convert CKAN dataset json to datapackge json e.g. <a href="/convert?q=0c03fa08-2142-426b-b1ca-fa852f909aa6">/convert?q=0c03fa08-2142-426b-b1ca-fa852f909aa6</a> </li>
+    <li>convert_resources?q={ckan-dataset-id} - convert CKAN dataset json to datapackge json with resources e.g. <a href="/convert_resources?q=0c03fa08-2142-426b-b1ca-fa852f909aa6">/convert_resources?q=0c03fa08-2142-426b-b1ca-fa852f909aa6</a> </li>
+    <li>package_json?q={ckan-dataset-id} - download CKAN dataset json to datapage.json file <a href="/package_json?q=0c03fa08-2142-426b-b1ca-fa852f909aa6">/package_json?q=0c03fa08-2142-426b-b1ca-fa852f909aa6</a></li>
 </ul>
 
+
+{##}
+{#    <li>list_all/ - view all json in the CKAN</li>#}
+{#    <li>search?q={string} - search within CKAN</li>#}
 </body>
 </html>

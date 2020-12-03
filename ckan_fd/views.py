@@ -1,4 +1,9 @@
 from django.shortcuts import render
+import os
+from django.conf import settings
+from django.http import HttpResponse, Http404
+import requests
+import re
 import json
 
 # Create your views here.
@@ -7,6 +12,7 @@ from django.http import HttpResponse
 from .requests import get_all_ckan_list
 from .requests import search_ckan
 from .requests import convert_ckan
+from .requests import convert_ckan_resources
 
 
 def index(request):
@@ -28,6 +34,11 @@ def ckan_convert(request):
     response_json = convert_ckan(search_string)
     return HttpResponse(response_json, content_type='application/json')
 
+def ckan_convert_resources(request):
+    search_string = request.GET['q']
+    response_json = convert_ckan_resources(search_string)
+    return HttpResponse(response_json, content_type='application/json')
+
 
 def ckan_package_json(request):
     search_string = request.GET['q']
@@ -38,3 +49,35 @@ def ckan_package_json(request):
     response = HttpResponse(content, content_type='application/json')
     response['Content-Disposition'] = 'attachment; filename={0}'.format(filename)
     return response
+
+def getFilename_fromCd(cd):
+    if not cd:
+        return None
+    fname = re.findall('filename=(.+)', cd)
+    if len(fname) == 0:
+        return None
+    return fname[0]
+
+
+def download_resources(request):
+    search_string = request.GET['q']
+    response_json = convert_ckan_resources(search_string)
+    resources_list = response_json.get('resources')
+    for each_resource in resources_list:
+        url = each_resource.get('url')
+        r = requests.get(url, allow_redirects=True)
+        filename = getFilename_fromCd(r.headers.get('content-disposition'))
+        open(filename, 'wb').write(r.content)
+        # response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+
+    return resources_list
+
+
+def download(request, path):
+    file_path = os.path.join(settings.MEDIA_ROOT, path)
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/json")
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
+    raise Http404
