@@ -14,7 +14,7 @@ REST interface
     to datapackage json with resources, also if any of the resources
     files are csv file the tabular data package will be converted. e.g.
     [/convert\_resources?q=grassroots-frictionless-data-test](/convert_resources?q=grassroots-frictionless-data-test)
-
+-   convert_push?q=grassroots-frictionless-data-test&key=example_key - push the generated datapackage.json to ckan.
 
 ###Other stuff
 
