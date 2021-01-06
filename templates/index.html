@@ -6,14 +6,22 @@
 </head>
 <body>
 <h1>CKAN - Frictionless Data</h1>
-
+<p>
+    This Django app can convert CKAN's datasets metadata json to Frictionless Data datapackage.json as well as push this
+    file back to ckan, if any resources under a dataset contains csv, the tabular data package schema will be added.</p>
 
 <h2>REST interface</h2>
 <h3>GET</h3>
 <ul>
-    <li>convert?q={ckan-dataset-id} - convert CKAN dataset json to datapackge json e.g. <a href="/convert?q=0c03fa08-2142-426b-b1ca-fa852f909aa6">/convert?q=0c03fa08-2142-426b-b1ca-fa852f909aa6</a> </li>
-    <li>convert_resources?q={ckan-dataset-id} - convert CKAN dataset json to datapackage json with resources, also if any of the resources files are csv file the tabular data package will be converted. e.g. <a href="/convert_resources?q=grassroots-frictionless-data-test">/convert_resources?q=grassroots-frictionless-data-test</a> </li>
-    <li>convert_push?q=grassroots-frictionless-data-test&key=example_key - push the generated datapackage.json to ckan</li>
+    <li>convert?q={ckan-dataset-id} - convert CKAN dataset json to datapackge json e.g. <a
+            href="/convert?q=0c03fa08-2142-426b-b1ca-fa852f909aa6">/convert?q=0c03fa08-2142-426b-b1ca-fa852f909aa6</a>
+    </li>
+    <li>convert_resources?q={ckan-dataset-id} - convert CKAN dataset json to datapackage json with resources, also if
+        any of the resources files are csv file the tabular data package will be converted. e.g. <a
+                href="/convert_resources?q=grassroots-frictionless-data-test">/convert_resources?q=grassroots-frictionless-data-test</a>
+    </li>
+    <li>convert_push?q=grassroots-frictionless-data-test&key=example_key - push the generated datapackage.json to ckan
+    </li>
 </ul>
 
 <p>Other stuff</p>
@@ -21,6 +29,6 @@
 <ul>
     <li>list_all/ - view all json in the CKAN, raw json output</li>
     <li>search?q={string} - search within CKAN, raw json output</li>
-    </ul>
+</ul>
 </body>
 </html>

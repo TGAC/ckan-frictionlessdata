@@ -62,7 +62,7 @@ def generate_csv_schema(url):
 
 def push_to_ckan(entry_id, key, file_content):
     response = requests.post(resource_create_url,
-                  data={"package_id": entry_id, "name":"datapackage.json"},
+                  data={"package_id": entry_id, "name":"datapackage.json","description":"Frictionless Data datapackage.json"},
                   headers={"X-CKAN-API-Key": key},
                   files=[('upload', file_content)])
     return response

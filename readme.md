@@ -1,6 +1,7 @@
 CKAN - Frictionless Data
 ========================
 
+This Django app can convert CKAN's datasets metadata json to Frictionless Data datapackage.json as well as push this file back to ckan, if any resources under a dataset contains csv, the tabular data package schema will be added.
 
 REST interface
 --------------
