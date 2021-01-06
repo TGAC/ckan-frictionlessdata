@@ -10,6 +10,8 @@ list_url = "https://ckan.grassroots.tools/api/3/action/package_list"
 
 detail_url = "https://ckan.grassroots.tools/api/3/action/package_show?id="
 
+resource_create_url = "https://ckan.grassroots.tools/api/3/action/resource_create"
+
 #0c03fa08-2142-426b-b1ca-fa852f909aa6
 
 def get_all_ckan_list():
@@ -58,9 +60,9 @@ def generate_csv_schema(url):
     return d
 
 
-
-# def push_to_ckan(entry_id, key, file_content)
-#     requests.post('http://0.0.0.0:5000/api/action/resource_create',
-#                   data={"package_id": entry_id},
-#                   headers={"X-CKAN-API-Key": "21a47217-6d7b-49c5-88f9-72ebd5a4d4bb"},
-#                   files=[('upload', file('/path/to/file/to/upload.csv'))])
+def push_to_ckan(entry_id, key, file_content):
+    response = requests.post(resource_create_url,
+                  data={"package_id": entry_id},
+                  headers={"X-CKAN-API-Key": key},
+                  files=[('upload', file_content)])
+    return response

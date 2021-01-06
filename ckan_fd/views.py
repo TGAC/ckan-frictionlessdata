@@ -13,6 +13,7 @@ from .requests import get_all_ckan_list
 from .requests import search_ckan
 from .requests import convert_ckan
 from .requests import convert_ckan_resources
+from .requests import push_to_ckan
 
 
 def index(request):
@@ -54,8 +55,9 @@ def ckan_package_json(request):
 def ckan_convert_push(request):
     search_string = request.GET['q']
     ckan_key = request.GET['key']
-    response_json = convert_ckan(search_string)
-    return HttpResponse(response_json, content_type='application/json')
+    response_json = convert_ckan_resources(search_string)
+    response = push_to_ckan(search_string, ckan_key, response_json)
+    return HttpResponse(response, content_type='application/json')
 
 
 
