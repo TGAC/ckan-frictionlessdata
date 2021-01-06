@@ -16,7 +16,7 @@ REST interface
     [/convert\_resources?q=grassroots-frictionless-data-test](/convert_resources?q=grassroots-frictionless-data-test)
 -   convert_push?q=grassroots-frictionless-data-test&key=example_key - push the generated datapackage.json to ckan.
 
-###Other stuff
+### Other stuff
 
 -   list\_all/ - view all json in the CKAN, raw json output
 -   search?q={string} - search within CKAN, raw json output
