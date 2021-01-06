@@ -27,5 +27,5 @@ urlpatterns = [
     path('package_json', views.ckan_package_json),
     path('convert', views.ckan_convert),
     path('convert_resources', views.ckan_convert_resources),
-    path('download_resources', views.download_resources),
+    path('convert_push', views.ckan_convert_push),
 ]
