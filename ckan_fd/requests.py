@@ -1,5 +1,7 @@
 import requests
 import json
+import csv
+from contextlib import closing
 from frictionless_ckan_mapper import ckan_to_frictionless
 
 search_url = "https://ckan.grassroots.tools/api/3/action/package_search?q="
@@ -34,17 +36,30 @@ def convert_ckan_resources(string):
 def csv_datapackage(output_frictionless_dict):
     for resource in output_frictionless_dict['resources']:
         if resource['format'] == 'CSV':
-            file_content = requests.get(resource['url'])
-            schema = generate_csv_schema(file_content)
+            # file_content = requests.get(resource['url'])
+            schema = generate_csv_schema(resource['url'])
             resource['schema'] = schema
     return output_frictionless_dict
 
 
-def generate_csv_schema(file_content):
-    return ''
+def generate_csv_schema(url):
+    r = requests.get(url)
+    decoded_content = r.content.decode('utf-8')
+    cr = csv.reader(decoded_content.splitlines(), delimiter=',')
+    my_list = list(cr)
+    d = {}
+    field = []
+    for element in my_list[0]:
+        element_json = {}
+        element_json['name'] = element
+        element_json['type'] = 'string'
+        field.append(element_json)
+    d['field'] = field
+    return d
 
 
-# def push_to_ckan(entry_id, file_path)
+
+# def push_to_ckan(entry_id, key, file_content)
 #     requests.post('http://0.0.0.0:5000/api/action/resource_create',
 #                   data={"package_id": entry_id},
 #                   headers={"X-CKAN-API-Key": "21a47217-6d7b-49c5-88f9-72ebd5a4d4bb"},
